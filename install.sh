@@ -9,7 +9,7 @@ fi
 dir=`pwd`
 
 #権限
-chmod -R 777 LedManager/
+chmod -R 777 ./
 
 echo "前提パッケージをインストールします。"
 apt update && apt install python3-dev python3-pillow -y
@@ -60,15 +60,15 @@ do
     cd $dir
     if [[ $inread -eq "1" ]]; then
         type=$inread
-        sed -i -e "s/##MAPPING_TYPE##/'adafruit-hat'/" ./LedManager/install/options.py
+        sed -i -e "s/##MAPPING_TYPE##/'adafruit-hat'/" ./install/options.py
         break
     elif [[ $inread -eq "2" ]]; then
         type=$inread
-        sed -i -e "s/##MAPPING_TYPE##/'adafruit-hat-pwm'/" ./LedManager/install/options.py
+        sed -i -e "s/##MAPPING_TYPE##/'adafruit-hat-pwm'/" ./install/options.py
         break
     elif [[ $inread -eq "3" ]]; then
         type=$inread
-        sed -i -e "s/##MAPPING_TYPE##/'regular'/" ./LedManager/install/options.py
+        sed -i -e "s/##MAPPING_TYPE##/'regular'/" ./install/options.py
         break
     else
         echo "入力に誤りがあります。"
@@ -106,8 +106,8 @@ do
     read inread
     if [[ $inread -eq "1" ]]; then
         cd $dir
-        sed -i -e "s/##PANEL_TYPE##/'$paneltype'/" ./LedManager/install/options.py
-        sed -i -e "s/##SLOWDOWN##/$slowdown/" ./LedManager/install/options.py
+        sed -i -e "s/##PANEL_TYPE##/'$paneltype'/" ./install/options.py
+        sed -i -e "s/##SLOWDOWN##/$slowdown/" ./install/options.py
         echo "LEDパネルの設定が完了しました。LedManager/config.jsonに設定を保存しました。"
         break
     elif [[ $inread -eq "2" ]]; then
@@ -123,9 +123,9 @@ done
 kill $pid
 
 cd $dir
-cp ./LedManager/install/options.py ./LedManager/options.py
+cp ./install/options.py ./options.py
 
-sed -i -e "s&##PROGRAM_DIR##&'$dir'&" ./LedManager/install/LedManager.sh
+sed -i -e "s&##PROGRAM_DIR##&'$dir'&" ./install/LedManager.sh
 
 
 rm -rf /tmp/rpi-rgb-led-matrix
